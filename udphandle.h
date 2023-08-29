@@ -20,14 +20,17 @@ public:
     void handledata(QByteArray datagram);
     void Packaging(int id, int x, int y, int z, int yaw);
     void PackagingVision();
-signals:
-    void result(int);
-    void sigjsondata(int);
-    void landingid(int);
-private:
     int idx[5];
     int idy[5];
     int idz[5];
     int idw[5];
+signals:
+    void result(int);
+    void sigjsondata(int);
+    void landingid(int);
+    void finishhandle();//处理数据结束
+
+private:
+
 };
 #endif // UDPHANDLE_H

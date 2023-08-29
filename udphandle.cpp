@@ -2,7 +2,7 @@
 QMutex mutexjson;
 udphandle::udphandle(QObject *parent) : QObject(parent)
 {
-
+    flag=2;
 }
 
 udphandle::~udphandle()
@@ -373,8 +373,10 @@ void udphandle::handledata(QByteArray datagram)
                 }
             }
             PackagingVision();
+         
         }
     }
+    emit finishhandle();//处理数据结束
     return;
 }
 
@@ -486,56 +488,71 @@ void udphandle::PackagingVision()
     int timeStr = timeDate .toTime_t();   				// 将当前时间转为时间戳
     uint8_t sbuf[512] = {0};
     //将map数据取出
-    FLY_SET_DATA fly[3];
-    int flyid[3];
+    FLY_SET_DATA fly[5];
+    int flyid[5];
     int sum = 0;
     QByteArray flyBuf;
     flyBuf.clear();
     memset(&flyid, 0, sizeof(flyid));
+
     hgprotocol_message_t  msg;
     QMap<int, FLY_SET_DATA>::const_iterator iter = mapSetFlyData.constBegin();
     while (iter != mapSetFlyData.constEnd())
     {
+        sum = iter.key();
         flyid[sum] = iter.key();
         fly[sum] = iter.value();
-        hgprotocol_swarm_track_t flydata;
-        memset(&flydata, 0, sizeof(hgprotocol_swarm_track_t));
-        flydata.time_stamp = timeStr;
-        flydata.fun_id = 1;
-        flydata.swarm_state = START_SWARM_TRACK;
-        for(int i = 0; i < 3; i++)
-        {
-            flydata.pos[i*5] = idx[i]* 0.1;
-            flydata.pos[i*5+1] = idy[i]* 0.1;
-            flydata.pos[i*5+2] = idz[i]* 0.1;
-            flydata.pos[i*5+3] = idw[i]* 0.1;
-            flydata.pos[i*5+4] = fly[i].carnum.toFloat();
-            flydata.is_candidate[i] = fly[i].covering.toInt();
-            flydata.mav_target[i] = fly[i].carnum.toFloat();
-            flydata.mav_target[3+i] = fly[i].direction.toFloat();
-            flydata.track_dist[i] = fly[i].radius.toInt();
-            flydata.track_dist[3+i] = fly[i].height.toInt();
-        }
-        flydata.vehicle0[0] = idx[3]* 0.1;
-        flydata.vehicle0[1] = idy[3]* 0.1;
-        flydata.vehicle0[2] = idz[3]* 0.1;
-        flydata.vehicle0[3] = idw[3]* 0.1;
-        flydata.vehicle1[0] = idx[4]* 0.1;
-        flydata.vehicle1[1] = idy[4]* 0.1;
-        flydata.vehicle1[2] = idz[4]* 0.1;
-        flydata.vehicle1[3] = idw[4]* 0.1;
-
-        hgprotocol_swarm_track_encode(0, 0, &msg, &flydata);
-        int size = hgprotocol_msg_to_send_buffer(sbuf, &msg);
-
-        flyBuf.resize(size);
-        memcpy(flyBuf.data(), sbuf, size);
-        mutexjson.lock();
-        mapSenddata.insert(flyid[sum], flyBuf);
-        mutexjson.unlock();
-        emit sigjsondata(flyid[sum]);
         ++iter;
-        ++sum;
-    }   
+    }
+    hgprotocol_swarm_track_t flydata;
+    memset(&flydata, 0, sizeof(hgprotocol_swarm_track_t));
+    flydata.time_stamp = timeStr;
+    flydata.fun_id = 1;
+    flydata.swarm_state = START_SWARM_TRACK;
+
+    for(int i = 0; i < 3; i++)
+    {
+        flydata.pos[i*5] = idx[i]* 0.1;
+        flydata.pos[i*5+1] = idy[i]* 0.1;
+        flydata.pos[i*5+2] = idz[i]* 0.1;
+        flydata.pos[i*5+3] = idw[i]* 0.1;
+        flydata.pos[i*5+4] = fly[i+1].carnum.toFloat();
+        flydata.is_candidate[i] = fly[i+1].covering.toInt();
+        flydata.mav_target[i] = fly[i+1].carnum.toFloat();
+        flydata.mav_target[3+i] = fly[i+1].direction.toFloat();
+        flydata.track_dist[i] = fly[i+1].radius.toInt();
+        flydata.track_dist[3+i] = fly[i+1].height.toInt();
+        qDebug() <<  3+i << flydata.track_dist[3+i];
+        qDebug() <<  3+i << flydata.mav_target[3+i];
+    }
+    flydata.vehicle0[0] = idx[3]* 0.1;
+    flydata.vehicle0[1] = idy[3]* 0.1;
+    flydata.vehicle0[2] = idz[3]* 0.1;
+    flydata.vehicle0[3] = idw[3]* 0.1;
+    flydata.vehicle1[0] = idx[4]* 0.1;
+    flydata.vehicle1[1] = idy[4]* 0.1;
+    flydata.vehicle1[2] = idz[4]* 0.1;
+    flydata.vehicle1[3] = idw[4]* 0.1;
+
+    hgprotocol_swarm_track_encode(0, 0, &msg, &flydata);
+    int size = hgprotocol_msg_to_send_buffer(sbuf, &msg);
+
+    flyBuf.resize(size);
+    memcpy(flyBuf.data(), sbuf, size);
+    mutexjson.lock();
+    iter = mapSetFlyData.constBegin();
+    while (iter != mapSetFlyData.constEnd())
+    {
+        mapSenddata.insert(iter.key(), flyBuf);
+        ++iter;
+    }
+    mutexjson.unlock();
+    iter = mapSetFlyData.constBegin();
+    while (iter != mapSetFlyData.constEnd())
+    {
+        emit sigjsondata(iter.key());
+        ++iter;
+        Sleep(10);
+    }
     return;
 }

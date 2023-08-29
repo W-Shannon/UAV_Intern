@@ -33,20 +33,21 @@ QPoint readyapply,prereadyapply,afterapply=QPoint(0,0);
 void paintarea::paintEvent(QPaintEvent *event)
 {
 
-//    // 绘图
-//    QPainter painter(this);
-//    pixfly.load(":/qss/fly_ui.png");
+    // 绘图
+    QPainter painter(this);
+    pixfly.load(":/qss/fly_ui.png");
 //    painter.drawPixmap(50, 750, 50, 50, pixfly);
 //    painter.drawPixmap(100, 750, 50, 50, pixfly);
 //    painter.drawPixmap(150, 750, 50, 50, pixfly);
-//    pixcar.load(":/qss/car.png");
+    pixcar.load(":/qss/car.png");
 //    painter.drawPixmap(150, 50, 80, 50, pixcar);
 //    painter.drawPixmap(650, 50, 80, 50, pixcar);
 
-//    // 利用更改坐标原点实现平移
-//    painter.translate(100,100);     //将（100，100）设为坐标原点
-//    painter.drawPixmap(0,0,50,50,pix);  //实现缩放
-//    painter.translate(-100, -100);  //让图片的中心作为旋转的中心
+    // 利用更改坐标原点实现平移
+    qDebug() << this->width() << " " << this->height();
+    painter.translate(this->width()/2,this->height()/2);     //将（100，100）设为坐标原点
+    painter.drawPixmap(0,0,50,50,pixfly);  //实现缩放
+    //painter.translate(-100, -100);  //让图片的中心作为旋转的中心
 
 //        // 实现图片的缩放
 //        painter.translate(100,100); //将（100，100）设为坐标原点

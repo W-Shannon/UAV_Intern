@@ -16,6 +16,10 @@ public:
     ~paintarea();
     void SetFly();
     void slotDisplayPlaneInfo(int row, int column);
+    int idx[5];
+    int idy[5];
+    int idz[5];
+    int idw[5];
 protected:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event);
@@ -27,8 +31,10 @@ private:
     int     rowbuff;
     int     colbuff;
     int       rowcolumn = -1;
+
 private slots:
     void timerTimeOut();
+
 
 
 };

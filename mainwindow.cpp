@@ -228,6 +228,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(u_thread, &udpstates::jsondata, h_thread, &udphandle::handledata, Qt::BlockingQueuedConnection);
     connect(h_thread, &udphandle::sigjsondata, s_thread, &sendthread::senddata, Qt::DirectConnection);
     connect(h_thread, &udphandle::landingid, this, &MainWindow::DLanding4);
+    connect(h_thread,&udphandle::finishhandle,this,&MainWindow::UdptoPaint);
     _udpHandle->start();
 
 
@@ -2021,3 +2022,16 @@ void MainWindow::DLanding4(int id)
 
 }
 /*--------------------------------------------------------------------------*/
+
+
+void MainWindow::UdptoPaint()
+{
+    for(int i=0;i<5;i++)
+    this->PaintArea->idx[i]=this->h_thread->idx[i];
+    for(int i=0;i<5;i++)
+    this->PaintArea->idy[i]=this->h_thread->idy[i];
+    for(int i=0;i<5;i++)
+    this->PaintArea->idz[i]=this->h_thread->idz[i];
+    for(int i=0;i<5;i++)
+    this->PaintArea->idw[i]=this->h_thread->idw[i];
+}

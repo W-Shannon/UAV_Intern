@@ -129,6 +129,7 @@ public:
     void DConfirm2(bool checked);
     void DConfirm3(bool checked);
     void DLanding4(int id);
+    void UdptoPaint();
 private:
     Ui::MainWindow *ui;
     FlyStates *state = new FlyStates();
