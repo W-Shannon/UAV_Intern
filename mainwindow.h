@@ -144,6 +144,7 @@ private:
     QThread*     _udpThread = nullptr;
     paintarea*   PaintArea = new paintarea(); 
     udphandle*   h_thread;
+    udphandle*   i_thread;
     QThread*     _udpHandle = nullptr;
 
     int     m_nCurrentRobot;
