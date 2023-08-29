@@ -9,7 +9,7 @@ udpstates::udpstates(QObject *parent) : QObject(parent)
 
     reciver->bind(QHostAddress::Any, 8900);
     //客户端发送数据后触发readyRead
-    //connect(reciver, SIGNAL(readyRead()),this, SLOT(recvdata()));
+    connect(reciver, SIGNAL(readyRead()),this, SLOT(recvdata()));
     connect(reciver, &QUdpSocket::readyRead, this, &udpstates::recvdata);
 
 }
@@ -41,7 +41,7 @@ void udpstates::recvdata()
         //datagram.data()是把QByteArray转为char *
         //sender代表发送端的IP地址，senderPort代表发送端的端口
         reciver->readDatagram(datagram.data(), datagram.size(), &recvip, &port);
-        //qDebug() << datagram.data();
+        qDebug() << datagram.data();
         emit jsondata(datagram);    //发送数据解析json
     }
 }
