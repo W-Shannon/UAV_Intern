@@ -15,7 +15,7 @@ paintarea::paintarea(QWidget *parent) :
     timer = new QTimer(this);
 
     /* 定时100ms */
-    timer->start(33);
+    timer->start(100);
 
     /* 信号槽连接 */
     //connect(timer, SIGNAL(timeout()), this, SLOT(timerTimeOut()));
@@ -47,14 +47,48 @@ void paintarea::paintEvent(QPaintEvent *event)
 //    float y = -idx[0]/10;
 
     // 利用更改坐标原点实现平移
-    qDebug() << this->width() << " " << this->height();
-    painter.translate(this->width()/2,this->height()/2);     //将（100，100）设为坐标原点
-    painter.drawPixmap(idx[0],idy[0],50,50,pixfly);  //实现缩放
-    painter.drawPixmap(idx[1],idy[1],50,50,pixfly);  //实现缩放
-    painter.drawPixmap(idx[2],idy[2],50,50,pixfly);  //实现缩放
+    int width[5]={40,40,40,40,40};
+    int height[5]={40,40,40,40,40};
+    for(int i=0; i<3; i++)
+    {
+        qDebug()<< "idz:" << idz[i];
+        width[i] = width[i]/(1 + (float)idz[i]*0.5/200);
+        height[i] = height[i]/(1 + (float)idz[i]*0.5/200);
+    }
+    // qDebug() << this->width() << " " << this->height();
+    painter.translate(this->width()/2, this->height()/2);//将（100，100）设为坐标原点
 
-    painter.drawPixmap(idx[3],idy[3],50,50,pixcar);  //实现缩放
-    painter.drawPixmap(idx[4],idy[4],50,50,pixcar);  //实现缩放
+
+    painter.translate(idx[3],idy[3]);
+    painter.rotate(idw[3]); //旋转90
+    painter.drawPixmap(0,0,40,30,pixcar);  //小车4
+    painter.rotate(-idw[3]); //旋转
+    painter.translate(-idx[3],-idy[3]);
+
+    painter.translate(idx[4],idy[4]);
+    painter.rotate(idw[4]); //旋转90
+    painter.drawPixmap(0,0,40,30,pixcar);  //小车5
+    painter.rotate(-idw[4]); //旋转
+    painter.translate(-idx[4],-idy[4]);
+
+    painter.translate(idx[0],idy[0]);
+    painter.rotate(idw[0]); //旋转
+    painter.drawPixmap(0,0,width[0],height[0],pixfly);  //飞机1
+    painter.rotate(-idw[0]); //旋转
+    painter.translate(-idx[0],-idy[0]);
+
+    painter.translate(idx[1],idy[1]);
+    painter.rotate(idw[1]); //旋转
+    painter.drawPixmap(0,0,width[1],height[1],pixfly);  //飞机2
+    painter.rotate(-idw[1]); //旋转
+    painter.translate(-idx[1],-idy[1]);
+
+    painter.translate(idx[2],idy[2]);
+    painter.rotate(idw[2]); //旋转
+    painter.drawPixmap(0,0,width[2],height[2],pixfly);  //飞机3
+    painter.rotate(-idw[2]); //旋转
+    painter.translate(-idx[2],-idy[2]);
+
     //painter.translate(-100, -100);  //让图片的中心作为旋转的中心
 
 //        // 实现图片的缩放

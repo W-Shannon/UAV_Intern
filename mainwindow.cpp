@@ -225,13 +225,15 @@ MainWindow::MainWindow(QWidget *parent)
     _udpHandle = new QThread();   //创建线程对象
     h_thread->moveToThread(_udpHandle);
     i_thread = new udphandle();
-    i_thread->moveToThread(_udpHandle);
+    _udpHandle0 = new QThread();   //创建线程对象
+    i_thread->moveToThread(_udpHandle0);
     //发送完信号后发送者所在线程会阻塞，直到槽函数运行完。接收者和发送者绝对不能在一个线程，否则程序会死锁
     connect(u_thread, &udpstates::jsondata, h_thread, &udphandle::handledata, Qt::BlockingQueuedConnection);
     connect(h_thread, &udphandle::sigjsondata, s_thread, &sendthread::senddata, Qt::DirectConnection);
     connect(h_thread, &udphandle::landingid, this, &MainWindow::DLanding4);
     connect(h_thread, &udphandle::finishhandle,this,&MainWindow::UdptoPaint);
     _udpHandle->start();
+    _udpHandle0->start();
 
 
 }
@@ -2035,5 +2037,5 @@ void MainWindow::UdptoPaint()
     for(int i=0;i<5;i++)
         this->PaintArea->idz[i]=this->h_thread->idz[i]/10;
     for(int i=0;i<5;i++)
-        this->PaintArea->idw[i]=this->h_thread->idw[i];
+        this->PaintArea->idw[i]=-this->h_thread->idw[i]/10-90;
 }

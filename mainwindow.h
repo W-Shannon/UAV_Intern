@@ -146,6 +146,7 @@ private:
     udphandle*   h_thread;
     udphandle*   i_thread;
     QThread*     _udpHandle = nullptr;
+    QThread*     _udpHandle0 = nullptr;
 
     int     m_nCurrentRobot;
     int     m_nTableRowCount;
