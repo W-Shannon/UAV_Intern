@@ -39,7 +39,7 @@ void paintarea::paintEvent(QPaintEvent *event)
     pixcar.load(":/qss/car.png");
     int width[3]={40,40,40};
     int height[3]={40,40,40};
-    int horder[3]={1,2,3};
+    int horder[3]={0,1,2};
 
     for(int i=0; i<3; i++)
     {
