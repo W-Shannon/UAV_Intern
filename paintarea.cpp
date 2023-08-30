@@ -45,14 +45,14 @@ void paintarea::paintEvent(QPaintEvent *event)
     {
         width[i] = width[i]/(1 + (float)idz[i]*0.5/200);
         height[i] = height[i]/(1 + (float)idz[i]*0.5/200);
-//        for(int j=i;j>0;j--)//高度排序
-//        {
-//            if(idz[horder[j]]<idz[horder[j-1]]){
-//                int temp=horder[j-1];
-//                horder[j-1]=horder[j];
-//                horder[j]=temp;
-//            }
-//        }
+        for(int j=i;j>0;j--)//高度排序
+        {
+            if(idz[horder[j]]<idz[horder[j-1]]){
+                int temp=horder[j-1];
+                horder[j-1]=horder[j];
+                horder[j]=temp;
+            }
+        }
     }
     painter.translate(this->width()/2, this->height()/2);//将（100，100）设为坐标原点
 
