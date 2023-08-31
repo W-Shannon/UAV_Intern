@@ -26,11 +26,16 @@ protected:
 private:
     Ui::paintarea *ui;
     QTimer *timer;      //定时器，用于定时更新界面
-    QPixmap pixfly;
-    QPixmap pixcar;
+    QPixmap pixfly[3];
+    QPixmap pixcar[2];
+    QPixmap pixbg;
     int     rowbuff;
     int     colbuff;
     int       rowcolumn = -1;
+    int flywidth[3]={40,40,40};
+    int flyheight[3]={40,40,40};
+    int horder[3]={0,1,2};
+    int carsize[2]={48,36};
 
 private slots:
     void timerTimeOut();

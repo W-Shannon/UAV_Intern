@@ -2,7 +2,7 @@
 QMutex mutexjson;
 udphandle::udphandle(QObject *parent) : QObject(parent)
 {
-    flag=2;
+    //flag=2;
 }
 
 udphandle::~udphandle()
@@ -42,6 +42,235 @@ void udphandle::handledata(QByteArray datagram)
             }
         }
     }
+    if (!doc.isNull())
+    {
+        if (doc.isObject())
+        {
+            QJsonObject object = doc.object();
+            if (object.contains("1"))      //飞机坐标
+            {
+                QJsonValue id = object.value("1");
+                if (id.isObject())
+                {
+                    QJsonObject obj = id.toObject();
+                    if (obj.contains("x"))
+                    {
+                        QJsonValue value = obj.value("x");
+                        if (value.isDouble())
+                        {
+                            idx[0] = value.toDouble();
+                            //qDebug() << "x : " << idx[0];
+                        }
+                    }
+                    if (obj.contains("y"))
+                    {
+                        QJsonValue value = obj.value("y");
+                        if (value.isDouble())
+                        {
+                            idy[0] = value.toDouble();
+                            //qDebug() << "y : " << idy[0];
+                        }
+                    }
+                    if (obj.contains("z"))
+                    {
+                        QJsonValue value = obj.value("z");
+                        if (value.isDouble())
+                        {
+                            idz[0] = value.toDouble();
+                            //qDebug() << "z : " << idz[0];
+                        }
+                    }
+                    if (obj.contains("yaw"))
+                    {
+                        QJsonValue value = obj.value("yaw");
+                        if (value.isDouble())
+                        {
+                            idw[0] = value.toDouble();
+                            //qDebug() << "yaw : " << idw[0];
+                        }
+                    }
+                }
+            }
+            if (object.contains("2"))      //飞机坐标
+            {
+                QJsonValue id = object.value("2");
+                if (id.isObject())
+                {
+                    QJsonObject obj = id.toObject();
+                    if (obj.contains("x"))
+                    {
+                        QJsonValue value = obj.value("x");
+                        if (value.isDouble())
+                        {
+                            idx[1] = value.toDouble();
+                            //qDebug() << "x : " << idx[1];
+                        }
+                    }
+                    if (obj.contains("y"))
+                    {
+                        QJsonValue value = obj.value("y");
+                        if (value.isDouble())
+                        {
+                            idy[1] = value.toDouble();
+                            //qDebug() << "y : " << idy[1];
+                        }
+                    }
+                    if (obj.contains("z"))
+                    {
+                        QJsonValue value = obj.value("z");
+                        if (value.isDouble())
+                        {
+                            idz[1] = value.toDouble();
+                            //qDebug() << "z : " << idz[1];
+                        }
+                    }
+                    if (obj.contains("yaw"))
+                    {
+                        QJsonValue value = obj.value("yaw");
+                        if (value.isDouble())
+                        {
+                            idw[1] = value.toDouble();
+                            //qDebug() << "yaw : " << idw[1];
+                        }
+                    }
+                }
+            }
+            if (object.contains("3"))      //飞机坐标
+            {
+                QJsonValue id = object.value("3");
+                if (id.isObject())
+                {
+                    QJsonObject obj = id.toObject();
+                    if (obj.contains("x"))
+                    {
+                        QJsonValue value = obj.value("x");
+                        if (value.isDouble())
+                        {
+                            idx[2] = value.toDouble();
+                            //qDebug() << "x : " << idx[2];
+                        }
+                    }
+                    if (obj.contains("y"))
+                    {
+                        QJsonValue value = obj.value("y");
+                        if (value.isDouble())
+                        {
+                            idy[2] = value.toDouble();
+                            //qDebug() << "y : " << idy[2];
+                        }
+                    }
+                    if (obj.contains("z"))
+                    {
+                        QJsonValue value = obj.value("z");
+                        if (value.isDouble())
+                        {
+                            idz[2] = value.toDouble();
+                            //qDebug() << "z : " << idz[2];
+                        }
+                    }
+                    if (obj.contains("yaw"))
+                    {
+                        QJsonValue value = obj.value("yaw");
+                        if (value.isDouble())
+                        {
+                            idw[2] = value.toDouble();
+                            //qDebug() << "yaw : " << idw[2];
+                        }
+                    }
+                }
+            }
+            if (object.contains("4"))      //小车坐标
+            {
+                QJsonValue id = object.value("4");
+                if (id.isObject())
+                {
+                    QJsonObject obj = id.toObject();
+                    if (obj.contains("x"))
+                    {
+                        QJsonValue value = obj.value("x");
+                        if (value.isDouble())
+                        {
+                            idx[3] = value.toDouble();
+                            //qDebug() << "x : " << idx[3];
+                        }
+                    }
+                    if (obj.contains("y"))
+                    {
+                        QJsonValue value = obj.value("y");
+                        if (value.isDouble())
+                        {
+                            idy[3] = value.toDouble();
+                            //qDebug() << "y : " << idy[3];
+                        }
+                    }
+                    if (obj.contains("z"))
+                    {
+                        QJsonValue value = obj.value("z");
+                        if (value.isDouble())
+                        {
+                            idz[3] = value.toDouble();
+                            //qDebug() << "z : " << idz[3];
+                        }
+                    }
+                    if (obj.contains("yaw"))
+                    {
+                        QJsonValue value = obj.value("yaw");
+                        if (value.isDouble())
+                        {
+                            idw[3] = value.toDouble();
+                            //qDebug() << "yaw : " << idw[3];
+                        }
+                    }
+                }
+            }
+            if (object.contains("5"))      //小车坐标
+            {
+                QJsonValue id = object.value("5");
+                if (id.isObject())
+                {
+                    QJsonObject obj = id.toObject();
+                    if (obj.contains("x"))
+                    {
+                        QJsonValue value = obj.value("x");
+                        if (value.isDouble())
+                        {
+                            idx[4] = value.toInt();
+                            //qDebug() << "x : " << idx[4];
+                        }
+                    }
+                    if (obj.contains("y"))
+                    {
+                        QJsonValue value = obj.value("y");
+                        if (value.isDouble())
+                        {
+                            idy[4] = value.toInt();
+                            //qDebug() << "y : " << idx[4];
+                        }
+                    }
+                    if (obj.contains("z"))
+                    {
+                        QJsonValue value = obj.value("z");
+                        if (value.isDouble())
+                        {
+                            idz[4] = value.toInt();
+                            //qDebug() << "z : " << idz[4];
+                        }
+                    }
+                    if (obj.contains("yaw"))
+                    {
+                        QJsonValue value = obj.value("yaw");
+                        if (value.isDouble())
+                        {
+                            idw[4] = value.toInt();
+                            //qDebug() << "yaw : " << idw[4];
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
     if(flag == 1)
     {
         if (!doc.isNull())

@@ -35,16 +35,18 @@ void paintarea::paintEvent(QPaintEvent *event)
 
     // 绘图
     QPainter painter(this);
-    pixfly.load(":/qss/fly_ui.png");
-    pixcar.load(":/qss/car.png");
-    int width[3]={40,40,40};
-    int height[3]={40,40,40};
-    int horder[3]={0,1,2};
+    pixfly[0].load(":/qss/fly1_1.png");
+    pixfly[1].load(":/qss/fly2_1.png");
+    pixfly[2].load(":/qss/fly3_1.png");
+    pixcar[0].load(":/qss/car4_1.png");
+    pixcar[1].load(":/qss/car5_1.png");
+    pixbg.load(":/qss/hg.jpg");
+
 
     for(int i=0; i<3; i++)
     {
-        width[i] = width[i]/(1 + (float)idz[i]*0.5/200);
-        height[i] = height[i]/(1 + (float)idz[i]*0.5/200);
+        flywidth[i] = flywidth[i]/(1 + (float)idz[i]*0.6/200);
+        flyheight[i] = flyheight[i]/(1 + (float)idz[i]*0.6/200);
         for(int j=i;j>0;j--)//高度排序
         {
             if(idz[horder[j]]<idz[horder[j-1]]){
@@ -55,58 +57,32 @@ void paintarea::paintEvent(QPaintEvent *event)
         }
     }
     painter.translate(this->width()/2, this->height()/2);//将（100，100）设为坐标原点
-
+    painter.drawRect(-170,-168,344,336);   // 绘制矩形框的位置和大小
+    painter.drawPixmap(-169,-167,343,335,pixbg);
 
     painter.translate(idx[3],idy[3]);
     painter.rotate(idw[3]); //旋转
-    painter.drawPixmap(0,0,40,30,pixcar);  //小车4
+    painter.drawPixmap(0,0,carsize[0],carsize[1],pixcar[0]);  //小车4
     painter.rotate(-idw[3]); //旋转
     painter.translate(-idx[3],-idy[3]);
 
     painter.translate(idx[4],idy[4]);
     painter.rotate(idw[4]); //旋转
-    painter.drawPixmap(0,0,40,30,pixcar);  //小车5
+    painter.drawPixmap(0,0,carsize[0],carsize[1],pixcar[1]);  //小车5
     painter.rotate(-idw[4]); //旋转
     painter.translate(-idx[4],-idy[4]);
 
     for(int i=0;i<3;i++)
     {
+        if(idx[i]==0&&idy[i]==0&&idz[i]==0)
+            continue;
         painter.translate(idx[horder[i]],idy[horder[i]]);
         painter.rotate(idw[horder[i]]); //旋转
-        painter.drawPixmap(0,0,width[horder[i]],height[horder[i]],pixfly);  //飞机
+        painter.drawPixmap(0,0,flywidth[horder[i]],flyheight[horder[i]],pixfly[horder[i]]);  //飞机
         painter.rotate(-idw[horder[i]]); //旋转
         painter.translate(-idx[horder[i]],-idy[horder[i]]);
     }
-//    painter.translate(idx[1],idy[1]);
-//    painter.rotate(idw[1]); //旋转
-//    painter.drawPixmap(0,0,width[1],height[1],pixfly);  //飞机2
-//    painter.rotate(-idw[1]); //旋转
-//    painter.translate(-idx[1],-idy[1]);
 
-//    painter.translate(idx[2],idy[2]);
-//    painter.rotate(idw[2]); //旋转
-//    painter.drawPixmap(0,0,width[2],height[2],pixfly);  //飞机3
-//    painter.rotate(-idw[2]); //旋转
-//    painter.translate(-idx[2],-idy[2]);
-
-    //painter.translate(-100, -100);  //让图片的中心作为旋转的中心
-
-//        // 实现图片的缩放
-//        painter.translate(100,100); //将（100，100）设为坐标原点
-//        qreal width = pix.width(); //获得以前图片的宽和高
-//        qreal height = pix.height();
-
-//        pix = pix.scaled(width*2,height*2,Qt::KeepAspectRatio);
-//        //将图片的宽和高都扩大两倍，并且在给定的矩形内保持宽高的比值
-//        painter.drawPixmap(100,100,pix);
-//        painter.translate(-100, -100); //让图片的中心作为旋转的中心
-
-//        // 实现图片的旋转
-//        painter.translate(500, 400); //让图片的中心作为旋转的中心
-//        painter.rotate(90); //顺时针旋转90度
-//        painter.drawPixmap(0,0,100,100,pix);
-//        painter.rotate(-90); //顺时针旋转90度
-//        painter.translate(-500, -400); //让图片的中心作为旋转的中心
 
 
 }
@@ -120,7 +96,7 @@ void paintarea::mousePressEvent(QMouseEvent *event)
 
         // 判断鼠标点击位置是否在绘图区域内
         QRect targetRect;//(100, 100, 200, 200); // 获取绘图区域
-        targetRect = pixfly.rect();
+        targetRect = pixfly[0].rect();
         if (targetRect.contains(pos))
         {
             qDebug() << "鼠标点击在绘图区域内";

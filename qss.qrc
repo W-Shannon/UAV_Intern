@@ -4,5 +4,16 @@
         <file>qss/fly_on.png</file>
         <file>qss/car.png</file>
         <file>qss/fly_ui.png</file>
+        <file>qss/car4.jpg</file>
+        <file>qss/car5.jpg</file>
+        <file>qss/fly1 .png</file>
+        <file>qss/fly2.png</file>
+        <file>qss/fly3.png</file>
+        <file>qss/fly1_1.png</file>
+        <file>qss/car4_1.png</file>
+        <file>qss/car5_1.png</file>
+        <file>qss/fly2_1.png</file>
+        <file>qss/fly3_1.png</file>
+        <file>qss/hg.jpg</file>
     </qresource>
 </RCC>
