@@ -32,8 +32,6 @@ private:
     int     rowbuff;
     int     colbuff;
     int       rowcolumn = -1;
-    int flywidth[3]={40,40,40};
-    int flyheight[3]={40,40,40};
     int horder[3]={0,1,2};
     int carsize[2]={48,36};
 

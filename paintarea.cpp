@@ -43,6 +43,9 @@ void paintarea::paintEvent(QPaintEvent *event)
     pixbg.load(":/qss/hg.jpg");
 
 
+    int flywidth[3]={40,40,40};
+    int flyheight[3]={40,40,40};
+
     for(int i=0; i<3; i++)
     {
         flywidth[i] = flywidth[i]/(1 + (float)idz[i]*0.6/200);
@@ -56,6 +59,9 @@ void paintarea::paintEvent(QPaintEvent *event)
             }
         }
     }
+
+
+
     painter.translate(this->width()/2, this->height()/2);//将（100，100）设为坐标原点
     painter.drawRect(-170,-168,344,336);   // 绘制矩形框的位置和大小
     painter.drawPixmap(-169,-167,343,335,pixbg);
