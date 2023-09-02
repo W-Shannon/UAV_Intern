@@ -29,6 +29,7 @@ private:
     QPixmap pixfly[3];
     QPixmap pixcar[2];
     QPixmap pixbg;
+    QPixmap pixbg1;
     int     rowbuff;
     int     colbuff;
     int       rowcolumn = -1;

@@ -41,6 +41,7 @@ void paintarea::paintEvent(QPaintEvent *event)
     pixcar[0].load(":/qss/car4_1.png");
     pixcar[1].load(":/qss/car5_1.png");
     pixbg.load(":/qss/hg.jpg");
+    pixbg1.load(":/qss/OIP.jpg");
 
 
     int flywidth[3]={40,40,40};
@@ -61,10 +62,10 @@ void paintarea::paintEvent(QPaintEvent *event)
     }
 
 
-
+    //painter.drawPixmap(0,0,this->width(),this->height(),pixbg1);
     painter.translate(this->width()/2, this->height()/2);//将（100，100）设为坐标原点
+    painter.drawPixmap(-170,-168,344,336,pixbg);
     painter.drawRect(-170,-168,344,336);   // 绘制矩形框的位置和大小
-    painter.drawPixmap(-169,-167,343,335,pixbg);
 
     painter.translate(idx[3],idy[3]);
     painter.rotate(idw[3]); //旋转

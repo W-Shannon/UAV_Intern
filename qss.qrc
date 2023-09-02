@@ -15,5 +15,6 @@
         <file>qss/fly2_1.png</file>
         <file>qss/fly3_1.png</file>
         <file>qss/hg.jpg</file>
+        <file>qss/OIP.jpg</file>
     </qresource>
 </RCC>
