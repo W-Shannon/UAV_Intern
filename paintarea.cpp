@@ -1,4 +1,4 @@
-#include "paintarea.h"
+﻿#include "paintarea.h"
 #include "ui_paintarea.h"
 #include "include.h"
 
@@ -20,6 +20,14 @@ paintarea::paintarea(QWidget *parent) :
     /* 信号槽连接 */
     //connect(timer, SIGNAL(timeout()), this, SLOT(timerTimeOut()));
     connect(timer, &QTimer::timeout, this, &paintarea::timerTimeOut);
+    //    //绘制字体
+    //    QLabel *label = new QLabel("四川大学2023暑期实习：集群围捕无人机",this);
+    //    label->setGeometry(-300,-300,400,400);  // Set geometry (position and size)
+    //    label->setStyleSheet("background-color: black;");
+    //    label->setAlignment(Qt::AlignCenter);//设置对齐方式
+    //    QFont font("Arial", 20, QFont::Bold);//设置字体大小和样式
+    //    label->setFont(font);
+    //    label->setStyleSheet("color: blue;");
 }
 
 paintarea::~paintarea()
@@ -42,7 +50,8 @@ void paintarea::paintEvent(QPaintEvent *event)
     pixcar[1].load(":/qss/car5_1.png");
     pixbg.load(":/qss/hg.jpg");
     pixbg1.load(":/qss/OIP.jpg");
-
+    title.load(":/qss/title.jpg");
+    pic_bg.load(":/qss/bg3.png");
 
     int flywidth[3]={40,40,40};
     int flyheight[3]={40,40,40};
@@ -64,6 +73,10 @@ void paintarea::paintEvent(QPaintEvent *event)
 
     //painter.drawPixmap(0,0,this->width(),this->height(),pixbg1);
     painter.translate(this->width()/2, this->height()/2);//将（100，100）设为坐标原点
+    //painter.drawPixmap(-170,-168,344,336,pixbg);
+    painter.drawPixmap(-(this->width()/2),-(this->height()/2)+50,this->width(),this->height(),pic_bg);
+    painter.drawPixmap(-(this->width()/2),-(this->height()/2),this->width(),180,title);
+    //painter.drawPixmap(-(this->width()/2),-(this->height()/2)+200,this->width(),this->height()-200,pic_bg);
     painter.drawPixmap(-170,-168,344,336,pixbg);
     painter.drawRect(-170,-168,344,336);   // 绘制矩形框的位置和大小
 

@@ -1,4 +1,4 @@
-#ifndef PAINTAREA_H
+﻿#ifndef PAINTAREA_H
 #define PAINTAREA_H
 
 #include <QWidget>
@@ -30,6 +30,8 @@ private:
     QPixmap pixcar[2];
     QPixmap pixbg;
     QPixmap pixbg1;
+    QPixmap title;
+    QPixmap pic_bg;
     int     rowbuff;
     int     colbuff;
     int       rowcolumn = -1;

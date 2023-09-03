@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ui_flystates.h"
 
@@ -119,14 +119,49 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tabWidget->setStyleSheet("QTabWidget#tabWidget{background-color:rgb(0,0,0);}\
                                  QTabBar::tab{margin-right:5px;padding-left:50px;padding-right:50px;width:100px;height:40px;background-color:rgb(220,200,180);color:rgb(0,0,0);font:10pt '新宋体'}\
-                                 QTabBar::tab::selected{background-color:rgb(0,100,200);color:rgb(255,0,0);font:10pt '新宋体'}");
-                                 ui->tab->setStyleSheet("QWidget#tab{""background-color:#54FF9F;""border:1px solid #eeeeee;}");
-
-    ui->tab2->setStyleSheet("QWidget#tab2{""background-color:#54FF9F;""border:1px solid #eeeeee;}");
+                                 QTabBar::tab::selected{background-color:rgb(100,149,237);color:rgb(255,0,0);font:10pt '新宋体'}");
+    ui->tab->setStyleSheet("QWidget#tab{""background-color:#273372;""border:1px solid #eeeeee;}");
+    ui->groupBox1->setStyleSheet("QGroupBox#groupBox1{"
+                                     "  background-image:url(:/qss/bg2.jpg);"
+                                     "  background-repeat: no-repeat;"
+                                     "  background-position: center;"
+                                     "  background-size:cover;"  // 设置背景图片大小为覆盖整个 QWidget
+                                     "}");
+    ui->tab2->setStyleSheet("QWidget#tab2{""background-color:rgb(100,149,237);""border:1px solid #eeeeee;}");
     ui->tabWidget->setStyleSheet("QTabWidget::tab-bar { alignment: center; }");     //tab居中
     //ui->groupBox->setStyleSheet("background-color:rgb(220,200,180);");
-    ui->groupBox2->setStyleSheet("background-color:rgb(255,255,255);");
-
+    ui->groupBox2->setStyleSheet("background-color:#f5e0bc;");
+    ui->groupBox2->setStyleSheet("QGroupBox#groupBox2{"
+                                     "  background-image:url(:/qss/bg5.jpg);"
+                                     "  background-repeat: no-repeat;"
+                                     "  background-position: center;"
+                                     "  background-size:cover;"  // 设置背景图片大小为覆盖整个 QWidget
+                                     "}");
+    ui->groupBox3->setStyleSheet("background-color:rgb(255,235,205);");
+    ui->groupBox3->setStyleSheet("QGroupBox#groupBox3{"
+                                     "  background-image:url(:/qss/bg4.jpg);"
+                                     "  background-repeat: no-repeat;"
+                                     "  background-position: center;"
+                                     "  background-size:cover;"  // 设置背景图片大小为覆盖整个 QWidget
+                                     "}");
+    ui->page->setStyleSheet("QWidget#page{"
+                                     "  background-image:url(:/qss/bg3.png);"
+                                     "  background-repeat: no-repeat;"
+                                     "  background-position: center;"
+                                     "  background-size:cover;"  // 设置背景图片大小为覆盖整个 QWidget
+                                     "}");
+    ui->page_2->setStyleSheet("QWidget#page_2{"
+                                     "  background-image:url(:/qss/bg3.png);"
+                                     "  background-repeat: no-repeat;"
+                                     "  background-position: center;"
+                                     "  background-size:cover;"  // 设置背景图片大小为覆盖整个 QWidget
+                                     "}");
+    ui->flyBox2->setStyleSheet("QGroupBox#flyBox2{"
+                                     "  background-image:url(:/qss/bg3.png);"
+                                     "  background-repeat: no-repeat;"
+                                     "  background-position: center;"
+                                     "  background-size:cover;"  // 设置背景图片大小为覆盖整个 QWidget
+                                     "}");
     //ui->tabWidget->setStyleSheet("QTabBar::tab {width:100px;height:40px;border:1px solid gray; border-bottom: none;border-top-left-radius: 4px;border-top-right-radius: 4px;background: white;}");
     ui->Editnum->setStyleSheet("border: none;");    //去边框
     ui->Editnum->setFont(QFont("宋体",22));//设置字体和字体大小
