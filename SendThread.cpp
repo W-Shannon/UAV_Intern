@@ -39,7 +39,7 @@ void sendthread::senddata(int id)
         }
         else
         {
-             //qDebug()<< "未找到socket";
+            //qDebug()<< "未找到socket";
             //emit CriticalNofly();
             //break;
             //continue;

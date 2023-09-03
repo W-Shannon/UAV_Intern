@@ -129,6 +129,7 @@ public:
     void DConfirm2(bool checked);
     void DConfirm3(bool checked);
     void DLanding4(int id);
+    void UdptoPaint();
 private:
     Ui::MainWindow *ui;
     FlyStates *state = new FlyStates();
@@ -143,7 +144,9 @@ private:
     QThread*     _udpThread = nullptr;
     paintarea*   PaintArea = new paintarea(); 
     udphandle*   h_thread;
+    udphandle*   i_thread;
     QThread*     _udpHandle = nullptr;
+    QThread*     _udpHandle0 = nullptr;
 
     int     m_nCurrentRobot;
     int     m_nTableRowCount;

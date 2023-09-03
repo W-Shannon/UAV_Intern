@@ -7,7 +7,7 @@ udpstates::udpstates(QObject *parent) : QObject(parent)
     reciver = new QUdpSocket(this);// 需要绑定一下接受数据的ip和port，根据情况不同，还需要加入广播组
     sender->bind(8888);
 
-    reciver->bind(QHostAddress::Any, 12345);
+    reciver->bind(QHostAddress::Any, 8900);
     //客户端发送数据后触发readyRead
     //connect(reciver, SIGNAL(readyRead()),this, SLOT(recvdata()));
     connect(reciver, &QUdpSocket::readyRead, this, &udpstates::recvdata);
@@ -42,7 +42,7 @@ void udpstates::recvdata()
         //sender代表发送端的IP地址，senderPort代表发送端的端口
         reciver->readDatagram(datagram.data(), datagram.size(), &recvip, &port);
         qDebug() << datagram.data();
-        //emit jsondata(datagram);    //发送数据解析json
+        emit jsondata(datagram);    //发送数据解析json
     }
 }
 

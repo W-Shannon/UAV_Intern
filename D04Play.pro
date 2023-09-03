@@ -31,6 +31,7 @@ SOURCES += \
     mainwindow.cpp \
     paintarea.cpp \
     udphandle.cpp \
+    udppaint.cpp \
     udpstates.cpp
 
 HEADERS += \
@@ -44,6 +45,7 @@ HEADERS += \
     mainwindow.h \
     paintarea.h \
     udphandle.h \
+    udppaint.h \
     udpstates.h
 
 FORMS += \
