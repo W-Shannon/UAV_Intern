@@ -41,7 +41,7 @@ void udpstates::recvdata()
         //datagram.data()是把QByteArray转为char *
         //sender代表发送端的IP地址，senderPort代表发送端的端口
         reciver->readDatagram(datagram.data(), datagram.size(), &recvip, &port);
-        //qDebug() << datagram.data();
+        qDebug() << datagram.data();
         emit jsondata(datagram);    //发送数据解析json
     }
 }
